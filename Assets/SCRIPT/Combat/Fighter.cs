@@ -13,11 +13,12 @@ namespace RPG.Combat
        [SerializeField] int wapenRang = 2;
        [SerializeField] float timeBetweenAtaack;
        [SerializeField] float weapanDameg = 10;
-       float timeSinceLastAttack;
+       float timeSinceLastAttack=Mathf.Infinity;
 
         private void Start()
         {
             mover = GetComponent<Mover>();
+            
         }
 
         private void Update()
@@ -71,7 +72,7 @@ namespace RPG.Combat
             return Vector3.Distance(transform.position, targetEnemy.transform.position) < wapenRang;
         }
 
-        public void Attak(CombatTarget target)
+        public void Attak(GameObject target)
         {
 
             targetEnemy = target.GetComponent<Health>();
@@ -88,7 +89,7 @@ namespace RPG.Combat
             targetEnemy = null;
            
         }
-       public bool CanAttake(CombatTarget combatTarget)
+       public bool CanAttake(GameObject combatTarget)
         {
             if (combatTarget == null) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();

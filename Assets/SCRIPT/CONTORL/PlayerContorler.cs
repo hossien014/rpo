@@ -28,12 +28,13 @@ namespace RPG.Contorl
                 foreach (RaycastHit hit in hits)
                 {
                     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+                if (target == null) continue;
 
-                if (!GetComponent<Fighter>().CanAttake(target)) continue;
+                if (!GetComponent<Fighter>().CanAttake(target.gameObject)) continue;
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        GetComponent<Fighter>().Attak(target);
+                        GetComponent<Fighter>().Attak(target.gameObject);
                     }
                 return true;
             }
@@ -44,6 +45,7 @@ namespace RPG.Contorl
         {
                 RaycastHit hit;
                 bool hasHit = Physics.Raycast(GetMousRay(), out hit);
+               
                 if (hasHit)
                 {
                     if (Input.GetMouseButton(0))

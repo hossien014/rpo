@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movment;
+using RPG.Combat;
 
 namespace RPG.Contorl
 {
@@ -11,22 +12,26 @@ namespace RPG.Contorl
         [SerializeField] float chaseRange = 5;
 
         GameObject player;
+        Fighter fighter;
         private void Awake()
         {
             player = GameObject.FindWithTag("Player");
+            fighter = GetComponent<Fighter>();
         }
 
         private void Update()
         {
-            chaseEnemy();
+            if (InAttakeRangeOfPlayer() && fighter.CanAttake(player))
+            {
+                fighter.Attak(player);
+            }
+
+          
         }
-        public void chaseEnemy()
+        public bool InAttakeRangeOfPlayer()
         {
             float PlayerDistance = Vector3.Distance(transform.position, player.transform.position);
-            if (PlayerDistance <= chaseRange)
-            {
-                GetComponent<Mover>().MoveTo(player.transform.position);
-            }
+            return PlayerDistance <= chaseRange;
         }
         
         
