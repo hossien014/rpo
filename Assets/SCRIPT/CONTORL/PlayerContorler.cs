@@ -28,8 +28,9 @@ namespace RPG.Contorl
                 foreach (RaycastHit hit in hits)
                 {
                     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                   
-                    if (target == null) continue;
+
+                if (!GetComponent<Fighter>().CanAttake(target)) continue;
+
                     if (Input.GetMouseButtonDown(0))
                     {
                         GetComponent<Fighter>().Attak(target);
@@ -39,7 +40,6 @@ namespace RPG.Contorl
             return false;
         }
 
-
         private bool IntractWhitMovment()
         {
                 RaycastHit hit;
@@ -47,15 +47,13 @@ namespace RPG.Contorl
                 if (hasHit)
                 {
                     if (Input.GetMouseButton(0))
-                    {
-                        mover.MoveTo(hit.point);  
-                    }
+                {
+                        mover.StartMoveAction(hit.point);
+                }
                 return true;
             }
-
             return false;
         }
-
 
         public static Ray GetMousRay()
         {
