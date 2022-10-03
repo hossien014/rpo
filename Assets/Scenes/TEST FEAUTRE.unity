@@ -1465,6 +1465,10 @@ PrefabInstance:
       propertyPath: timeBetweenAtaack
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8577052112381435952, guid: 8ede076672ee8e845b7a1b17cbf71c28, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8757088137651704850, guid: 8ede076672ee8e845b7a1b17cbf71c28, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1511,6 +1515,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8757088137651704862, guid: 8ede076672ee8e845b7a1b17cbf71c28, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757088137651704862, guid: 8ede076672ee8e845b7a1b17cbf71c28, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1732,7 +1740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217877079158090063, guid: bb1d2c43f5cdd914d9c4e4ba3d775cc4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0116763
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 2217877079158090063, guid: bb1d2c43f5cdd914d9c4e4ba3d775cc4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1740,7 +1748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2217877079158090063, guid: bb1d2c43f5cdd914d9c4e4ba3d775cc4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.3010883
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 2217877079158090063, guid: bb1d2c43f5cdd914d9c4e4ba3d775cc4, type: 3}
       propertyPath: m_LocalRotation.w

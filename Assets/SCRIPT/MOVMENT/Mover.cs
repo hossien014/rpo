@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
+
 namespace RPG.Movment
 {
     public class Mover : MonoBehaviour ,IAction
@@ -14,15 +15,18 @@ namespace RPG.Movment
         
         NavMeshAgent Charctor;
         Animator animator;
-
+        
         void Start()
         {
+            
             Charctor = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+            Charctor.autoRepath = true;
         }
 
         void Update()
         {
+
             UpdatAnimation();
         }
 

@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Movment;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Contorl
 {
-
-    public class AiContorler : MonoBehaviour
+    public class AiContorler : MonoBehaviour,IAction
     {
+        bool playerIsDead;
         [SerializeField] float chaseRange = 5;
 
         GameObject player;
@@ -21,9 +21,14 @@ namespace RPG.Contorl
 
         private void Update()
         {
-            if (InAttakeRangeOfPlayer() && fighter.CanAttake(player))
+            if (InAttakeRangeOfPlayer() && fighter.CanAttake(player) &&!playerIsDead)
             {
+                GetComponent<ActionScheduler>().startAction(this);
                 fighter.Attak(player);
+            }
+            else
+            {
+                fighter.Cancel();
             }
 
           
@@ -33,7 +38,11 @@ namespace RPG.Contorl
             float PlayerDistance = Vector3.Distance(transform.position, player.transform.position);
             return PlayerDistance <= chaseRange;
         }
-        
+        public void Cancel()
+        {
+            playerIsDead = false;
+            fighter.Cancel();
+        }
         
     }
 }

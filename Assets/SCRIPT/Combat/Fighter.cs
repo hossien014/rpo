@@ -8,7 +8,7 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour , IAction
     {
-        Health targetEnemy;
+        Health target;
         Mover mover;
        [SerializeField] int wapenRang = 2;
        [SerializeField] float timeBetweenAtaack;
@@ -25,15 +25,13 @@ namespace RPG.Combat
         {
             timeSinceLastAttack += Time.deltaTime;
 
-            if (targetEnemy == null) return;
-            if (targetEnemy.ISdead()) return;
+            if (target == null) return;
+            if (target.ISdead()) return;
             
                 if (!GetIsInRang())
                 {
                    GetComponent<ActionScheduler>().startAction(this); // cancel last event
-                   
-                   mover.MoveTo(targetEnemy.transform.position);      //move to enemy 
-                    
+                   mover.MoveTo(target.transform.position);      //move to enemy 
                 }
                 else
                 {
@@ -48,7 +46,7 @@ namespace RPG.Combat
         {
             if (timeSinceLastAttack > timeBetweenAtaack)
             {
-                transform.LookAt(targetEnemy.transform.position);  //look at enemy  
+                transform.LookAt(target.transform.position);  //look at enemy  
                 TrigerAttack();
                 timeSinceLastAttack = 0;
             }
@@ -64,30 +62,29 @@ namespace RPG.Combat
         void Hit()
         {
             //my changes 
-            if (targetEnemy == null) return;
-            targetEnemy.TakeDamge(weapanDameg);
+            if (target == null) return;
+            target.TakeDamge(weapanDameg);
         }
         private bool GetIsInRang()
         {
-            return Vector3.Distance(transform.position, targetEnemy.transform.position) < wapenRang;
+            return Vector3.Distance(transform.position, target.transform.position) < wapenRang;
         }
 
         public void Attak(GameObject target)
         {
-
-            targetEnemy = target.GetComponent<Health>();
+            if (target == null) return;
+            this.target = target.GetComponent<Health>();
             
         }
         public void CancelAttak()
         {
-            targetEnemy = null;
+            target = null;
         }
         public void Cancel()
         {
             GetComponent<Animator>().ResetTrigger("Attake");
             GetComponent<Animator>().SetTrigger("stopAttake");
-            targetEnemy = null;
-           
+            target = null;
         }
        public bool CanAttake(GameObject combatTarget)
         {
