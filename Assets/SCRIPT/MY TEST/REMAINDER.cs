@@ -6,9 +6,7 @@ public class REMAINDER : MonoBehaviour
 {
     Ray ray;
     void Start()
-    {
-
-     
+    { 
         print("ray.direction = " + ray.direction);
         int hash = ray.GetHashCode();
         print("HashCode = " + ray.GetHashCode());

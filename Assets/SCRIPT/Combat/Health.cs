@@ -7,6 +7,7 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
+        
         bool IsDead=false;
        [SerializeField] float health = 100;
 
@@ -23,6 +24,7 @@ namespace RPG.Core
             {
                 Die();
             }
+          
         }
 
         private void Die()

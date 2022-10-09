@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyRayCastCAmera : MonoBehaviour
+public  class MyRayCastCAmera :MonoBehaviour
 {
-    RaycastHit hit;
-    Vector3 targetPositon;
     
-    void Update()
+   public static int timer()
     {
-        Physics.Raycast(transform.position, transform.forward, out hit);
-         targetPositon = hit.transform.position;
+        return 12;
     }
-    public Vector3 GetTargetPOsiton()
-    {
-        return targetPositon;
-    }
-   
+
+
 
 }

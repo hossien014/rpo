@@ -31,8 +31,8 @@ namespace RPG.Combat
                 if (!GetIsInRang())
                 {
                    GetComponent<ActionScheduler>().startAction(this); // cancel last event
-                   mover.MoveTo(target.transform.position);      //move to enemy 
-                }
+                  if(target!=null) mover.MoveTo(target.transform.position);   //move to enemy 
+            }
                 else
                 {
                     mover.Cancel();
@@ -74,30 +74,23 @@ namespace RPG.Combat
         {
             if (target == null) return;
             this.target = target.GetComponent<Health>();
-            
         }
         public void CancelAttak()
         {
             target = null;
+        }
+        public bool CanAttake(GameObject combatTarget)
+        {
+            if (combatTarget == null) return false;  // check for delete 
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest!=null && !targetToTest.ISdead();
         }
         public void Cancel()
         {
             GetComponent<Animator>().ResetTrigger("Attake");
             GetComponent<Animator>().SetTrigger("stopAttake");
             target = null;
-        }
-       public bool CanAttake(GameObject combatTarget)
-        {
-            if (combatTarget == null) return false;
-            Health targetToTest = combatTarget.GetComponent<Health>();
-
-            return targetToTest!=null && !targetToTest.ISdead();
-
-            // می توانیم از فالس و ترو برای ریترن استفاده کنیم ولی کاری که 
-           // در مثال بالا انجام شده است  برسی کردن شرط است 
-           // یعنی گفتیم که اگر تارگت  نال نبود و مرده نبود ترو برگردان
-        }
-       
+        }  
     }
 
 }

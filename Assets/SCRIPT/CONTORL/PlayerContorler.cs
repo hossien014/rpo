@@ -17,10 +17,9 @@ namespace RPG.Contorl
         void Update()
         {
             if(IntractWhitFighter()) return;
-           if( IntractWhitMovment()) return;
+            if( IntractWhitMovment()) return;
             print("noting");
         }
-
         private bool IntractWhitFighter()
         {
             
@@ -28,7 +27,7 @@ namespace RPG.Contorl
                 foreach (RaycastHit hit in hits)
                 {
                     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
+                 if (target == null) continue;
 
                 if (!GetComponent<Fighter>().CanAttake(target.gameObject)) continue;
 
@@ -40,7 +39,6 @@ namespace RPG.Contorl
             }
             return false;
         }
-
         private bool IntractWhitMovment()
         {
                 RaycastHit hit;
@@ -56,7 +54,6 @@ namespace RPG.Contorl
             }
             return false;
         }
-
         public static Ray GetMousRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);

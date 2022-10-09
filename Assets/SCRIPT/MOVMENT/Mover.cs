@@ -6,27 +6,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 namespace RPG.Movment
 {
     public class Mover : MonoBehaviour ,IAction
     {
         
-        NavMeshAgent Charctor;
+        NavMeshAgent navmesh;
         Animator animator;
+        Health health;
         
         void Start()
         {
-            
-            Charctor = GetComponent<NavMeshAgent>();
+            health=GetComponent<Health>();
+            navmesh = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
-            Charctor.autoRepath = true;
+            navmesh.autoRepath = true;
         }
+       
 
         void Update()
         {
-
+            navmesh.enabled = !health.ISdead();
             UpdatAnimation();
         }
 
@@ -39,20 +39,21 @@ namespace RPG.Movment
         public void MoveTo(Vector3 destenation)
         {
             // i change this for player to charctor
-            Charctor.isStopped = false;
-            Charctor.destination = destenation;
+            navmesh.isStopped = false;
+            navmesh.destination = destenation;
         }
        
         private void UpdatAnimation()
         {
-            var LocalPvlocity = transform.InverseTransformDirection(Charctor.velocity);
+            var LocalPvlocity = transform.InverseTransformDirection(navmesh.velocity);
             float speed = LocalPvlocity.z;
             animator.SetFloat("forwardspeed", speed);
 
         }
         public void Cancel()
         {
-            Charctor.isStopped = true;
+            if(navmesh.enabled=true)
+            navmesh.isStopped = true;
         }
     }
 }

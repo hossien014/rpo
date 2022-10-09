@@ -3,35 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Movment;
+using System;
 
 namespace RPG.Contorl
 {
     public class AiContorler : MonoBehaviour,IAction
     {
         bool playerIsDead;
-        [SerializeField] float chaseRange = 5;
-
         GameObject player;
         Fighter fighter;
-        private void Awake()
+        Mover mover;
+        Health health;
+
+        Vector3 gaurdPositon;
+
+        [SerializeField] float chaseRange = 5;
+        [SerializeField] float SuspactTime = 5;
+        float timeSinceLastSawPlayer = Mathf.Infinity;
+
+
+        private void Start()
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
+            mover = GetComponent<Mover>();
+            health = GetComponent<Health>();
+            gaurdPositon = transform.position;
         }
-
         private void Update()
         {
+            if (health.ISdead()) return;
             if (InAttakeRangeOfPlayer() && fighter.CanAttake(player) &&!playerIsDead)
             {
-                GetComponent<ActionScheduler>().startAction(this);
-                fighter.Attak(player);
+                AttackBehaviour();
+                timeSinceLastSawPlayer = 0;
+            }
+            else if (timeSinceLastSawPlayer < SuspactTime)
+            {
+                SuspicionBehavour();
             }
             else
             {
-                fighter.Cancel();
+                GuroudBehaviour();
             }
-
-          
+            timeSinceLastSawPlayer += Time.deltaTime;
+        }
+        private void AttackBehaviour()
+        {
+            fighter.Attak(player);
+        }
+        private void SuspicionBehavour()
+        {
+            GetComponent<ActionScheduler>().cancelCurrentAction();
+        }
+        private void GuroudBehaviour()
+        {
+            mover.StartMoveAction(gaurdPositon);
         }
         public bool InAttakeRangeOfPlayer()
         {
@@ -43,6 +71,11 @@ namespace RPG.Contorl
             playerIsDead = false;
             fighter.Cancel();
         }
-        
+
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chaseRange);
+        }
     }
 }
