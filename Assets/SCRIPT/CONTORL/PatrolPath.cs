@@ -18,15 +18,15 @@ namespace RPG.Contorl
             }
 
         }
-        private  int GetNextWayPoint(int j)
+        public  int GetNextWayPoint(int i)
         {
-            if (j + 1 == transform.childCount)
+            if (i + 1 == transform.childCount)
             {
                 return 0;
             }
-            return j+1; 
+            return i+1; 
         }
-        private Vector3 GetWayPoint(int i)
+        public Vector3 GetWayPoint(int i)
         {
             return transform.GetChild(i).transform.position;
         }

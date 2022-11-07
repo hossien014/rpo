@@ -66,7 +66,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7249970434789097013, guid: 291fd514fd0f43845802ecfd13b9efe6, type: 3}
       propertyPath: health
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7646465116102593041, guid: 291fd514fd0f43845802ecfd13b9efe6, type: 3}
       propertyPath: m_Speed
@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894f94b0dcd6dde458f53ae4d126e410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPath: {fileID: 0}
+  WayPointTolerance: 1
   chaseRange: 5
   SuspactTime: 6
 --- !u!4 &2217877079158090063 stripped

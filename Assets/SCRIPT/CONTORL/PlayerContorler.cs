@@ -18,7 +18,7 @@ namespace RPG.Contorl
         {
             if(IntractWhitFighter()) return;
             if( IntractWhitMovment()) return;
-            print("noting");
+           // if mouse cant intract
         }
         private bool IntractWhitFighter()
         {
@@ -31,7 +31,7 @@ namespace RPG.Contorl
 
                 if (!GetComponent<Fighter>().CanAttake(target.gameObject)) continue;
 
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButton(0))
                     {
                         GetComponent<Fighter>().Attak(target.gameObject);
                     }
